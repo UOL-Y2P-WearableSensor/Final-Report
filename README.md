@@ -7,3 +7,5 @@ Once you have installed the plugin and one Latex distribution, run a configurati
 To make changes to the repo and avoid pushing directly to the main branch, it is recommended to use [GIT](https://git-scm.com/book/en/v2) and create a new branch. 
 
 If you're not familiar with GIT, you can use the [issue boards](https://github.com/UOL-Y2P-WearableSensor/Final-Report/issues) on GitHub or WhatsApp to discuss changes and coordinate with team members. This helps maintain the stability and integrity of the main branch, and allows for more organized and collaborative development.
+
+[//]: # (//test)
