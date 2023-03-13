@@ -12,7 +12,7 @@ Once you have installed the plugin and one Latex distribution, open the file ".r
 ### Joint working
 To make changes to the repo and avoid pushing directly to the main branch, it is recommended to use [GIT](https://git-scm.com/book/en/v2) and create a new branch. 
 
-1. Clone the main branch from GitHub
+1. Clone the main branch from GitHub. The clone is suggested here
     ```
     cd <path-you-want-save>
     git clone https://github.com/UOL-Y2P-WearableSensor/Final-Report.git
