@@ -16,7 +16,11 @@ To make changes to the repo and avoid pushing directly to the main branch, it is
     git checkout -b <new-branch-name>
     ```
 3. apply modifications.
-4. commit and pull this new branch to GitHub.
+4. commit and pull this new branch to remote GitHub.
+    ```
+    git commit "<your-commit-title>"
+    git push origin <new-branch-name>
+    ```
 5. [create new pull request](https://github.com/UOL-Y2P-WearableSensor/Final-Report/compare) from the new branch to main branch on GitHub.
 6. compare the difference and push to the main branch.
 
