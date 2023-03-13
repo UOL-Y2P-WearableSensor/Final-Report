@@ -1,8 +1,14 @@
 # Manual
 This Latex repo is based on [TeXiFy IDEA](https://github.com/Hannah-Sten/TeXiFy-IDEA) (an IntelliJ IDEs Plugin). You can install the plugin on any IntelliJ editor, such as CLion or Pycharm. However, to compile the codes, ensure you have a basic TeX/LaTeX core on your computer. Relevant instructions is [here](https://github.com/Hannah-Sten/TeXiFy-IDEA/wiki/Installation).
+### Features of TeXiFy
+1. [Writer ergonomics - writing LaTeX made less cumbersome](https://www.jetbrains.com/idea/features/)
+2. [Forward search and backward search](https://github.com/Hannah-Sten/TeXiFy-IDEA/wiki/Built-in-pdf-viewer-support)
+3. ...
+
+
 ### Configuration
-Once you have installed the plugin and one Latex distribution, run a configuration as below, especially the "Main file to compile" & "Directory for output files" two paths. Then you may have a corresponding PDF generated. If not, feel free to ask me.
-![image](config.png)
+Once you have installed the plugin and one Latex distribution, open the file ".run/pre.run.xml" in CLion. Save the config into your own project and run. Then you may have a corresponding PDF generated. If not, feel free to ask me.
+
 ### Joint working
 To make changes to the repo and avoid pushing directly to the main branch, it is recommended to use [GIT](https://git-scm.com/book/en/v2) and create a new branch. 
 
