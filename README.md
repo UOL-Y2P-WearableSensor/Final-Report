@@ -15,18 +15,20 @@ To make changes to the repo and avoid pushing directly to the main branch, it is
     ```
     git checkout -b <new-branch-name>
     ```
-   If you want to use an existed local branch, update the changes from remote main branch initially
+3. If you want to use an existed local branch, update the changes from remote main branch initially
    ```
-   git pull origin main
+   git pull origin main    //update changes from others
     ```
-3. Apply modifications.
-4. Commit and push this new branch to remote GitHub.
+4. Apply modifications.
+5. Commit and push this new branch to remote GitHub.
     ```
     git commit "<your-commit-title>"
-    git push origin <new-branch-name>
+    git push origin <new-branch-name>     //push your changes to remote non-main branch
     ```
-5. Create [new pull request](https://github.com/UOL-Y2P-WearableSensor/Final-Report/compare) from the new branch to main branch on GitHub, using WebUI (this step is on browser).
-6. Compare the difference and push to the main branch.
+6. Create [new pull request](https://github.com/UOL-Y2P-WearableSensor/Final-Report/compare) from the new branch to main branch on GitHub, using web browser (this step is on browser for convenient). Instruction is [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
+7. Compare the difference and push to the main branch.
+
+N.B: **For daily using, just repeat step 3 to 7.**
 
 If you're not familiar with GIT, you can use the [issue boards](https://github.com/UOL-Y2P-WearableSensor/Final-Report/issues) on GitHub or WhatsApp to discuss changes and coordinate with team members. This helps maintain the stability and integrity of the main branch, and allows for more organized and collaborative development.
 
