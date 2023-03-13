@@ -1,0 +1,51 @@
+%! Author = shenyixiao
+%! Date = 13/03/2023
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt, a4paper]{report}
+\usepackage{graphicx, listings, framed, mdframed, float}
+\usepackage{appendix, pdfpages, setspace, color, hyperref}
+\usepackage{tocloft}                    % This squashes the Table of Contents a bit
+\hypersetup{colorlinks=true}            % To avoid the borders around hyperlinks
+\hypersetup{colorlinks, citecolor=black, filecolor=black, linkcolor=black, urlcolor=black}
+\definecolor{MyLightYellow}{cmyk}{0,0.,0.2,0} % Used for program listings
+\definecolor{shadecolor}{cmyk}{0,0.2,0,0} % Used for snugshade listings
+\usepackage[top=3cm, bottom=3cm]{geometry}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{listings}% page margins
+\setlength{\parskip}{10pt}                % sets spacing between paragraphs
+\interfootnotelinepenalty=500             % this prevents footnotes breaking across pages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand\bibname{References}         % to change Bibliography to References
+\renewcommand\lstlistlistingname{List of Code Listings}
+\newcommand{\HRule}{\rule{\linewidth}{0.75mm}} % needed on title page
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\include{front_stuff}   %containging titlepage & abstract & declaration & table of contents...
+\include{introduction}  %containging backgrounds...
+\include{materials-and-methods} %list of all materials, methods?
+\include{design-and-implementation} %architecture design
+\include{results-and-analysis}  %latency & problems occured
+\include{discussion-and-conclusions}
+
+%references
+\singlespace
+\bibliographystyle{IEEEtran}               % References section created automatically
+\bibliography{MyRefs}                      % The file MyRefs.bib contains the actual bibliography material
+\addcontentsline{toc}{chapter}{References} % to add it to the table of contents
+
+%appendix
+\newpage
+\appendix
+\appendixpage
+\addappheadtotoc
+
+\end{document}
