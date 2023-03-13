@@ -6,6 +6,19 @@ Once you have installed the plugin and one Latex distribution, run a configurati
 ### Joint working
 To make changes to the repo and avoid pushing directly to the main branch, it is recommended to use [GIT](https://git-scm.com/book/en/v2) and create a new branch. 
 
+1. clone the main branch from GitHub
+    ```
+    cd <path-you-want-save>
+    git clone https://github.com/UOL-Y2P-WearableSensor/Final-Report.git
+    ```
+2. create a new branch from the main branch and switch to that branch
+    ```
+    git checkout -b <new-branch-name>
+    ```
+3. apply modifications.
+4. commit and pull this new branch to GitHub.
+5. [create new pull request](https://github.com/UOL-Y2P-WearableSensor/Final-Report/compare) from the new branch to main branch on GitHub.
+6. compare the difference and push to the main branch.
+
 If you're not familiar with GIT, you can use the [issue boards](https://github.com/UOL-Y2P-WearableSensor/Final-Report/issues) on GitHub or WhatsApp to discuss changes and coordinate with team members. This helps maintain the stability and integrity of the main branch, and allows for more organized and collaborative development.
 
-[//]: # (//test)
