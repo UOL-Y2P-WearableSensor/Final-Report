@@ -14,7 +14,8 @@
 \usepackage[top=3cm, bottom=3cm]{geometry}
 \usepackage{color}
 \usepackage{hyperref}
-\usepackage{listings}% page margins
+\usepackage{listings}
+\usepackage{xcolor}% page margins
 \setlength{\parskip}{10pt}                % sets spacing between paragraphs
 \interfootnotelinepenalty=500             % this prevents footnotes breaking across pages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -31,11 +32,10 @@
 
 \include{front_stuff}   %containging titlepage & abstract & declaration & table of contents...
 \include{introduction}  %containging backgrounds...
-\include{materials-and-methods} %list of all materials, methods?
 \include{design-and-implementation} %architecture design
-\include{results-and-analysis}  %latency & problems occured
+\include{materials-and-methods} %list of all materials, methods?
+\include{results}  %latency & problems occured
 \include{discussion-and-conclusions}
-
 %references
 \singlespace
 \bibliographystyle{IEEEtran}               % References section created automatically
