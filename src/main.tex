@@ -15,7 +15,8 @@
 \usepackage{color}
 \usepackage{hyperref}
 \usepackage{listings}
-\usepackage{xcolor}% page margins
+\usepackage{subcaption}
+\usepackage{xcolor}
 \setlength{\parskip}{10pt}                % sets spacing between paragraphs
 \interfootnotelinepenalty=500             % this prevents footnotes breaking across pages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,16 +31,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
+
 \include{front_stuff}   %containging titlepage & abstract & declaration & table of contents...
 \include{introduction}  %containging backgrounds...
 \include{design-and-implementation} %architecture design
 \include{materials-and-methods} %list of all materials, methods?
+\include{problem-identification-and-resolution} %list of all materials, methods?
 \include{results}  %latency & problems occured
 \include{discussion-and-conclusions}
+
+
 %references
 \singlespace
 \bibliographystyle{IEEEtran}               % References section created automatically
-\bibliography{MyRefs}                      % The file MyRefs.bib contains the actual bibliography material
+\bibliography{/Users/shenyixiao/Repo/Final-Report/src/MyRefs}                      % The file MyRefs.bib contains the actual bibliography material
 \addcontentsline{toc}{chapter}{References} % to add it to the table of contents
 
 %appendix
@@ -47,5 +52,24 @@
 \appendix
 \appendixpage
 \addappheadtotoc
+
+\chapter{Project Management Forms}
+%Appendix A: Attach the project management forms (Role allocation/responsibility matrix, Contribution to project deliverables, Attendance record, Supervisor weekly meeting log) to your project report as an appendix. Other supporting documents you may have used such as personal notes/notebooks/logbooks should not be included in the report.
+d
+\chapter{A Breakdown of Individual Contributions}
+%Appendix B: Include a breakdown of individual contributions to the project, for each and every of the group members. Members of the same group may obtain different marks based on their individual contributions to the project. Please make sure the information provided in this appendix is accurate. Project reports that do not include this appendix will not be marked.
+d
+\chapter{Datasheets}
+%-----------This is a FIGURE-----------------------
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.1\textwidth]{
+		fileForWriting/only two modifiable IIC address}
+	\caption[Data sheet of the IMU component]{Partial data sheet of the IMU component. The No.117 register indicates that for one specific compnent, there are at most two selectable IIC addresses to use.}
+	\label{fig:limited-IIC-address}
+\end{figure}
+%--------End of this FIGURE -----------  
+
+
 
 \end{document}
