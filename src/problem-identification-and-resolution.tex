@@ -34,7 +34,7 @@ By checking existed configurations and switching the 5G network to 2.4G shown in
 
 \section{Issue of ``no socket available''}
 \subsection{Problem locating}
-During the integration phase, a huge issue was encountered: the Arduino could only send motion data to the server for a very short time (from seconds to at most 3 minutes), where then the built-in Wi-Fi module would throw an error called ``no socket available''.
+During the code integration phase, a huge issue was encountered: the Arduino could only send motion data to the server for a very short time (from seconds to at most 3 minutes); then the built-in Wi-Fi module would throw an error called ``no socket available''.
 
 Although the IMU module and wireless transmission module had passed their own stress tests, an additional stress test for the new framework was subsequently conducted, which involved sending const string messages.
 During the test, the Arduino was able to send a const char array continuously without any issues for half hour.
@@ -44,8 +44,8 @@ With these three stress tests, this unstable output was eventually identified as
 
 
 \subsection{Problem analyzing}
-Further researching revealed that even though the Wi-Fi module communicates with MCU using SPI protocol, it also has another channel for IIC communication as portrayed in  Figure~\ref{fig:IIC-conflict}.
-Such ``additional'' IIC channel is then connected to external IIC channel between the IMU components and MCU\@.
+Further researching revealed that even though the Wi-Fi module communicates with the microcontroller unit (MCU) using SPI protocol, it also has another channel for IIC communication as portrayed in  Figure~\ref{fig:IIC-conflict}.
+Such ``additional'' IIC channel is then connected to the external IIC channel between IMUs and MCU\@.
 This may have implications for the result of ``no socket available''.
 
 %-----------This is a FIGURE-----------------------
@@ -53,7 +53,7 @@ This may have implications for the result of ``no socket available''.
 	\centering
 	\includegraphics[width=0.8\textwidth]{
 		fileForWriting/IIC-conflict}
-	\caption[Schematic for the Arduino-UNO-Wifi-Rev2]{Partial schematic for the Arduino-UNO-Wifi-Rev2, where the MCU, Wi-Fi module, and IMUs are sharing a same I2C communication channel.
+	\caption[Schematic for the Arduino-UNO-Wifi-Rev2]{Partial schematic for the Arduino-UNO-Wifi-Rev2, where the MCU, Wi-Fi module, and IMUs are sharing a same IIC communication channel.
 	}
 	\label{fig:IIC-conflict}
 \end{figure}
@@ -61,9 +61,9 @@ This may have implications for the result of ``no socket available''.
 
 
 
-Based on such troubleshooting, a hypothesis was formed that the external I2C might have an impact on the internal I2C, which could then result in a ``no socket available'' error in the Wi-Fi module.
+Based on such analysis, a hypothesis was formed that the external IIC might have an impact on the internal IIC, which could then result in a ``no socket available'' error in the Wi-Fi module.
 Additionally, during testing, it was noticed that shaking the IMU could subsequently trigger the error.
-It was speculated that the internal I2C requires a high level of communication quality.
+It was speculated that the internal IIC requires a high level of communication quality.
 Hence, one possible solution is improving the poor cables captured by the image of  Figure~\ref{fig:IIC-connections} (a).
 
 
@@ -71,7 +71,7 @@ Hence, one possible solution is improving the poor cables captured by the image 
 \subsubsection{Improve IIC communication quality}
 
 To prevent potential problems raised by poor IIC communication quality, a multicore screened cable was therefore applied, as Figure~\ref{fig:IIC-connections} (b) may show.
-Successfully, the Arduino could now continuously send motion data to remote server.
+Successfully, the Arduino could thus continuously send motion data to remote server.
 
 
 \begin{figure}[htbp]
@@ -100,12 +100,12 @@ As expected, the Wi-Fi module was indeed functioning well without any interferen
 This success also proved the correctness of previous analysis.
 
 
-In summary, the Wi-Fi module is very vulnerable to any external interference in its IIC channel.
+In summary, the Wi-Fi module appears to be very vulnerable to any external interference in its IIC channel.
 If affected, it may stop working and throw a ``no socket available'' error.
-As the MCU and module use another SPI channel to communicate, we decided to physically remove that IIC channel since this project did not require an IIC functionality of that module.
-After the removal, the whole system worked perfectly.
-The root of such issue may be the design flaw of Arduino-UNO-Wifi-Rev2, where the MCU, Wi-Fi module, and external IIC devices directly share one IIC channel.
-Simultaneously, the Wi-Fi module may require a high level of communication quality.
+As the MCU and module use another SPI channel to communicate, we decided to physically remove that ``additional'' IIC channel since this project did not require an IIC functionality of the built-in Wi-Fi component.
+After the removal, the whole system could work perfectly.
+As for the root of such issue, it may be the design flaw of Arduino-UNO-Wifi-Rev2, where the MCU, Wi-Fi module, and external IIC devices directly share one IIC channel.
+Simultaneously, the Wi-Fi module tend to require a high level of communication quality.
 
 
 %-----------This is a FIGURE-----------------------
