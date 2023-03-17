@@ -6,13 +6,13 @@
 
 \subsection{Main component list}
 \begin{enumerate}
-	\item   Arduino-UNO-Wifi-Rev2: an upgraded version of the standard Arduino Uno board that incorporates several additional features to enhance its functionality.
+	\item   Arduino-UNO-Wifi-Rev2: an upgraded version of the standard Arduino UNO board that incorporates several additional features to enhance its functionality.
 	In this project, the onboard Wi-Fi module was fully used to provide a wireless communication.
 	\item   Grove IMU 9DOF (ICM20600+AK09918): an inertial measurement unit module that integrates three sensors, including an accelerometer, gyroscope, and magnetometer.
-	However, this module does not have the function of temperature compensation.
+	However, this module does not have a physical circuit of temperature compensation.
 	Additionally, the chip ICM20600 only supports configuring two kinds of IIC addresses.
 	Relevant datasheet is shown in Figure~\ref{fig:limited-IIC-address} in Appendix.
-	\item   Gravity I2C Multiplexer: a powerful module that allows for the expansion of the I2C bus on Arduino.
+	\item   Gravity IIC Multiplexer: a powerful module that allows for the expansion of the IIC bus on Arduino.
 	It solves the problem of overlapping IIC address.
 	\item   Multi-core screened cable: to ensure the quality of wired communication.
 	\item   TP-Link AC1200 Wireless Dual Band Router: to provide a local area network.
@@ -36,8 +36,8 @@
 \subsection{Arduino: data collection}\label{subsec:data-fetching}
 \begin{enumerate}
 	\item   Firstly, connect the IIC multiplexer's VCC, GND, SDA, and SCL pins to the respective pins on the Arduino.
-	All the cables used were initially of the GROVE type, which was later replaced by screened cables.
-	\item   Then, each IMU was connected to one of the I2C multiplexer channels.
+	All the cables used were initially of the GROVE type, which were later replaced by screened cables.
+	\item   Then, each IMU was connected to one of the IIC multiplexer channels.
 	The port setting was saved into the code as portrayed in List~\ref{lst:port-saving}.
 
 	\lstset{language=C++}
@@ -52,7 +52,7 @@ enum portConfiguration {
 };
 	\end{lstlisting}
 
-	\item   After that, install the relevant libraries to drive the hardware components, such as the ``IMU-ICM20600.h'' and ``DFRobot\_I2C\_Multiplexer.h''.
+	\item   After that, install relevant libraries to drive the hardware components, such as the ``IMU-ICM20600.h'' for IMU and ``DFRobot\_I2C\_Multiplexer.h'' for multiplexer.
 	Due to some reading issues encountered while using the magnetic sensor, the current project only utilized a 6DOF transformation.
 	The initialization logic of four IMUs is shown below, where the default data rate for IMU was set to be 100 Hz.
 
@@ -73,12 +73,12 @@ for (int i = 0; i < 8; i++) {
 }
 	\end{lstlisting}
 
-	\item   After initialization, a calibration process was followed to improve the accuracy and reliability of the IMU's measurements.
-	It was achieved by averaging the whole data in the first three freezing seconds.
+	\item   After initialization, a calibration process was followed to improve the accuracy and reliability of the measurements.
+	It was achieved by averaging the output data in the first three seconds where the IMUs were motionless.
 	Then, future output would be reduced by this average to reduce factors of potential manufacturing variations or sensor drift.
 	Relevant code is included in List~\ref{lst:init-arduino} in Appendix.
 
-	\item   To obtain the motion data, the Attitude and Heading Reference System (AHRS) library named Mahony was utilized to generate Euler angles from raw data.
+	\item   To obtain the motion data, the attitude and heading reference system (AHRS) library named Mahony was utilized to generate Euler angles from raw data.
 	It is a set of algorithms designed to estimate the attitude and orientation of objects in three-dimensional space using fusion algorithms such as Kalman filter, Madgwick filter, and Mahony filter.
 	These tools enable fusing the raw data of IMUs to obtain more accurate, stable, and reliable attitude information.
 	The Mahony library, which is a popular sensor fusion algorithm, was selected for the experiment due to its higher computational efficiency.
@@ -90,15 +90,16 @@ for (int i = 0; i < 8; i++) {
 \subsection{Arduino: wireless communication} \label{subsec:5g-network}
 \begin{enumerate}
 	\item   To enable the built-in Wi-Fi module on Arduino-UNO-Wifi-Rev2, an external library called WiFiNINA was chosen and implemented.
-	This library, provided by the official Arduino website, facilitates communication between the microcontroller and the onboard Wi-Fi module through a Serial Peripheral Interface (SPI).
+	This library, provided by the official Arduino website, facilitates communication between the microcontroller and the onboard wi-fi module through a serial peripheral interface (SPI).
 	It also provides some simple examples for studying.
 	\item   Initially, the Arduino was connected to a 2.4G network and attempted to establish a connection with a remote server through a handshake process.
 	These functions are all included in the library and have been implemented in the kernel.
-	\item   Next, a simple const string message was written to one of the Arduino's sockets and sent by the kernel.
+	\item   Next, a simple const string message was written to one Arduino's socket and later sent by kernel.
 	Given that the server was capable of printing any incoming message, the message was finally displayed on the server's console as intended.
-	\item   Following this, a stress test was conducted to evaluate the system's capacity to handle a high volume of data.
+	\item   Following this, a stress test was conducted to evaluate the system's capacity to send a high volume of data.
 	This was accomplished by continuously sending an increasing number to the server, which was then printed by the server.
 	Meanwhile, the Arduino would also print out the message sent through a serial communication to the computer.
+	By such comparison, the latency caused in this process could be roughly estimated.
 \end{enumerate}
 
 
@@ -136,7 +137,7 @@ However, such basic generator was not flexible enough to rapidly create a specif
 Hence, a function that can generate models according to user customization was developed.
 It works like a text operator and user could change his text to modify a corresponding model subsequently.
 Relevant results are presented in the next chapter.
-In the meantime, the following are the main features of this displaying engine:
+In the meantime, the following are the main implementation of this displaying engine:
 
 %-----------This is a FIGURE-----------------------
 \begin{figure}[htbp]

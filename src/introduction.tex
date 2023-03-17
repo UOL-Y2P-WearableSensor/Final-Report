@@ -15,22 +15,20 @@ Nevertheless, the information obtained from a single IMU is limited and may not 
 A fundamental research gap remains in the development of a multi-IMU bio-logging device capable of comprehensively capturing the entire wingbeat action of birds.
 
 To fill such gap, this project aims to design a simple wearable sensor system based on four IMUs for human walking pattern recognition, capturing comprehensive motion data that can be used for analysis and simulation purposes.
-Furthermore, a front-end display engine utilizing an external JavaScript graphic library will also be created to generate a digital twin of humans in real time.
+Furthermore, a front-end displaying engine will also be created to generate a digital twin of humans in real time.
 This will not only enable motion tracking capabilities, but also allow for easy monitoring through a web browser with rapid deployment.
 
-While the initial testing of the technology will be conducted on human subjects, the potential applicability of this technology in tracking the movement and behavior of birds is promising. The data collected by this device provides a valuable opportunity to gain insights from the intricate and sophisticated designs found in nature. For instance, one potential application is to study the flight patterns of birds and how they utilize their wings to achieve optimal efficiency, especially when faced with varying wind directions.
+While the initial testing of the system will be conducted on human subjects, the potential applicability in tracking the movement and behavior of birds is promising.
+The data collected by this device would provide a valuable opportunity to gain insights from the intricate and sophisticated designs found in nature.
+For instance, one potential application is to study the flight patterns of birds and how they utilize their wings to achieve optimal efficiency, especially when faced with varying wind directions.
 
 In conclusion, this project aims to develop a cost-effective and easy-to-use multi-IMU bio-logging device that can comprehensively capture the complete motion of objects.
-The proposed device has the potential to contribute not only to the research on avian flight dynamics but also to the broader field of zoology, which will serve as a useful tool for researchers in various fields.
-
-
-%Nonetheless, a significant research gap remains in the development of a multi-IMU bio-logging device capable of comprehensively capturing the complete wingbeat motion of birds without any space limitations.
-%todo: future improvement, existed non-optical bio-logging systems---> machine learning ---> process data in depth
+The proposed device has the potential to contribute not only to the research on avian flight dynamics but also to the broader field of zoology, which may serve as a useful tool for researchers in various fields.
 
 
 \section{Objectives}
-The primary goal of this project is to create a digital twin of a human using wearable sensors.
-To achieve this objective, the project has been divided into the following three sub-objectives:
+The primary goal of this research project is to create a digital twin of a human using wearable sensors.
+To achieve such target, the project has been divided into the following three sub-objectives:
 \begin{enumerate}\label{obj}
     \item \label{itm:obj-data-collection}Data collection:
     Design a wearable device capable of collecting lower body motion data by attaching four IMUs, two on each femur and tibia.
@@ -38,12 +36,12 @@ To achieve this objective, the project has been divided into the following three
     In addition, the device will integrate an independent power source to ensure uninterrupted data collection during testing.
 
     \item \label{itm:obj-data-integration}Data integration:
-    A simple C++ socket server will be developed to serve as the central hub for collecting and processing the motion data collected by the IMUs.
+    A simple C\texttt{++} socket server will be developed to serve as the central hub for collecting and processing the motion data collected by the IMUs.
     This server will also be responsible for transmitting files to the front-end.
 
     \item \label{itm:obj-model-creation} Model creation:
     To enable the core functionality of motion-following, a simple front-end displaying engine will be developed to create a model of the human body.
-    This model will be generated using the motion data collected by the IMUs and will serve as the basis for further analysis and research.
+    This model should be input with the motion data collected by the IMUs to replicate corresponding movements.
 \end{enumerate}
 
 
