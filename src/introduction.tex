@@ -1,20 +1,27 @@
 \chapter{Introduction}
 Avian flight dynamics have been a topic of interest for many researchers over the years.
-In order to study the indoor wingbeat action of birds, previous research has utilized optical motion capture systems.
-\cite{ju_data-driven_2011}
-    \textcolor{red}{NEED ONE REFERENCE HERE.} %todo: zoology studies using optical bio-logging systems. (ju_data-driven_2011)
-While such optical bio-logging systems have been helpful in collecting data for analysis and simulation, they are limited by site constraints and high costs.
+To study the indoor wingbeat action of birds, previous researches have utilized optical motion capture systems to collect data.
+For example, in order to replicate the motions of avian flight in a physical simulation, a group of researchers from Korea employed a marker-based optical motion capture system and high-speed cameras to gather flight data from pigeons, as reported by Ju et al.
+in 2011~\cite{ju_data-driven_2011}.
+Using the observed data, they were able to develop more realistic wingbeat movements.
 
-Recent studies have attempted to address these limitations by installing single inertial measurement unit (IMU) on birds to acquire basic wingbeat data.
-%todo: zoology studies using non-optical bio-logging systems, often with single type of sensors. (lissaman_wind_2005, taylor_birds_2019, gomez_laich_identification_2009)
-\textcolor{red}{NEED THREE REFERENCE HERE}.
-However, the data collected from a single IMU is narrowed and does not capture the complete wingbeat action of birds. There is still a significant research gap in the development of a multi-IMU bio-logging device capable of comprehensively capturing the entire wingbeat action of birds.
+However, such optical bio-logging systems have practical limitations, such as site constraints and high costs.
+Recent studies have attempted to address these challenges by attaching a single inertial measurement unit (IMU) to birds to collect basic wingbeat data.
+For instance, in 2018, Taylor et al.
+compared the flight behavior of pigeons flying alone to those flying in pairs, by attaching a global position system (GPS) tracker and a 200 Hz tri-axial accelerometer to each bird for data collection~\cite{taylor_birds_2019}.
+The researchers found that paired individuals exhibited a higher frequency of wing flaps, suggesting a potential improvement in maneuverability and flight stability.
 
-To fill such research gap, this project aims to design a simple wearable sensor system based on four IMUs for human walking pattern recognition, capturing comprehensive motion data that can be used for analysis and simulation purposes. Furthermore, a front-end display engine utilizing an external JavaScript graphic library will also be created to quickly generate a digital twin of humans. This will not only enable motion tracking capabilities, but also allow for easy monitoring through a web browser with rapid deployment.
+Nevertheless, the information obtained from a single IMU is limited and may not provide a comprehensive representation of a bird's complete wingbeat movement.
+A fundamental research gap remains in the development of a multi-IMU bio-logging device capable of comprehensively capturing the entire wingbeat action of birds.
+
+To fill such gap, this project aims to design a simple wearable sensor system based on four IMUs for human walking pattern recognition, capturing comprehensive motion data that can be used for analysis and simulation purposes.
+Furthermore, a front-end display engine utilizing an external JavaScript graphic library will also be created to generate a digital twin of humans in real time.
+This will not only enable motion tracking capabilities, but also allow for easy monitoring through a web browser with rapid deployment.
 
 While the initial testing of the technology will be conducted on human subjects, the potential applicability of this technology in tracking the movement and behavior of birds is promising. The data collected by this device provides a valuable opportunity to gain insights from the intricate and sophisticated designs found in nature. For instance, one potential application is to study the flight patterns of birds and how they utilize their wings to achieve optimal efficiency, especially when faced with varying wind directions.
 
-In conclusion, this research project aims to fill the research gap in the development of a multi-IMU bio-logging device capable of comprehensively capturing a complete motion of objects. The proposed device has the potential to contribute not only to the research on avian flight dynamics but also to the field of zoology more broadly. Simultaneously, such device will be designed to be simple, cost-effective, and easy-using, providing a useful tool for researchers in various fields.
+In conclusion, this project aims to develop a cost-effective and easy-to-use multi-IMU bio-logging device that can comprehensively capture the complete motion of objects.
+The proposed device has the potential to contribute not only to the research on avian flight dynamics but also to the broader field of zoology, which will serve as a useful tool for researchers in various fields.
 
 
 %Nonetheless, a significant research gap remains in the development of a multi-IMU bio-logging device capable of comprehensively capturing the complete wingbeat motion of birds without any space limitations.
@@ -22,8 +29,8 @@ In conclusion, this research project aims to fill the research gap in the develo
 
 
 \section{Objectives}
-    The main objective of this project is to develop a digital representation of a human using wearable sensors.
-    To accomplish this objective, the following three sub-objectives have been outlined:
+The primary goal of this project is to create a digital twin of a human using wearable sensors.
+To achieve this objective, the project has been divided into the following three sub-objectives:
 \begin{enumerate}\label{obj}
     \item \label{itm:obj-data-collection}Data collection:
     Design a wearable device capable of collecting lower body motion data by attaching four IMUs, two on each femur and tibia.

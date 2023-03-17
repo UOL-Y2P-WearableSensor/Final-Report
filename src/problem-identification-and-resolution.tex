@@ -44,7 +44,7 @@ With these three stress tests, this unstable output was eventually identified as
 
 
 \subsection{Problem analyzing}
-Further researching revealed that even though the Wi-Fi module communicates with MCU using SPI protocol, it also has another channel for IIC communication as Figure~\ref{fig:IIC-conflict} has shown.
+Further researching revealed that even though the Wi-Fi module communicates with MCU using SPI protocol, it also has another channel for IIC communication as portrayed in  Figure~\ref{fig:IIC-conflict}.
 Such ``additional'' IIC channel is then connected to external IIC channel between the IMU components and MCU\@.
 This may have implications for the result of ``no socket available''.
 
@@ -64,7 +64,7 @@ This may have implications for the result of ``no socket available''.
 Based on such troubleshooting, a hypothesis was formed that the external I2C might have an impact on the internal I2C, which could then result in a ``no socket available'' error in the Wi-Fi module.
 Additionally, during testing, it was noticed that shaking the IMU could subsequently trigger the error.
 It was speculated that the internal I2C requires a high level of communication quality.
-Hence, one possible solution is improving the poor cables shown in the Figure~\ref{fig:IIC-connections} (a).
+Hence, one possible solution is improving the poor cables captured by the image of  Figure~\ref{fig:IIC-connections} (a).
 
 
 \subsection{Problem solving}
@@ -87,7 +87,7 @@ Successfully, the Arduino could now continuously send motion data to remote serv
 		\includegraphics[width=\textwidth]{fileForWriting/improved-connection}
 		\caption{Improved connection using screened cable.}
 	\end{subfigure}
-	\caption[]{Two connections of external IIC channel.}
+	\caption[]{Two types of connections to build the external IIC channel.}
 	\label{fig:IIC-connections}
 \end{figure}
 
@@ -95,7 +95,7 @@ Successfully, the Arduino could now continuously send motion data to remote serv
 During the following week of testing, the issue did not reoccur.
 However, after several accidental drops of the device, the problem resurfaced and the Arduino could not stably send motion data to server.
 
-To solve the issue from root, the ``additional'' IIC channel was physically removed by desoldering two resistor on that channel as Figure~\ref{fig:remove-IIC} may show.
+To solve the issue from root, the ``additional'' IIC channel was physically removed by desoldering two resistors on that channel as Figure~\ref{fig:remove-IIC} may show.
 As expected, the Wi-Fi module was indeed functioning well without any interference from external IIC channel.
 This success also proved the correctness of previous analysis.
 

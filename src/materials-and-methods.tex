@@ -11,13 +11,13 @@
 	\item   Grove IMU 9DOF (ICM20600+AK09918): an inertial measurement unit module that integrates three sensors, including an accelerometer, gyroscope, and magnetometer.
 	However, this module does not have the function of temperature compensation.
 	Additionally, the chip ICM20600 only supports configuring two kinds of IIC addresses.
-	Relevant datasheet is shown in Appendix~\ref{fig:limited-IIC-address}.
+	Relevant datasheet is shown in Figure~\ref{fig:limited-IIC-address} in Appendix.
 	\item   Gravity I2C Multiplexer: a powerful module that allows for the expansion of the I2C bus on Arduino.
 	It solves the problem of overlapping IIC address.
 	\item   Multi-core screened cable: to ensure the quality of wired communication.
 	\item   TP-Link AC1200 Wireless Dual Band Router: to provide a local area network.
+	\item   18650 2,600mAh Lithium Rechargeable Batteries: a built-in power source.
 	\item   Velcro Brand Adjustable Straps, 25mm x 680mm.
-	\item   18650 2,600mAh Lithium Rechargeable Batteries.
 \end{enumerate}
 
 
@@ -35,15 +35,55 @@
 
 \subsection{Arduino: data collection}\label{subsec:data-fetching}
 \begin{enumerate}
-%todo: refine this part
-	\item   Firstly, connect the VCC pin of the I2C multiplexer to the 5V pin of the Arduino.Connect the GND pin of the multiplexer to the GND pin of the Arduino.Connect the SDA and SCL pins of the multiplexer to the SDA (A4) and SCL (A5) pins of the Arduino, respectively.Connect each IMU to one of the I2C multiplexer channels using VCC, GND, SDA, and SCL pins.
-	\item   Install the required libraries for your specific IMU. For instance, the ``ICM 20600.h'', ``DFRobot\_I2C\_Multiplexer.h'', ``Wire.h” and ``MahonyAHRS.h'' libraries.
-	The Attitude and Heading Reference System (AHRS) library is a set of algorithms for estimating the attitude and orientation of objects in three-dimensional space.
-	These libraries are based primarily on IMU data such as the output of accelerometers, gyroscopes and magnetometers.
-	The AHRS library includes one or more fusion algorithms, such as Kalman filter, Madgwick filter and Mahony filter, which fuse multiple sensor data of IMUs together to obtain more accurate, stable and reliable attitude information.
-	In the experiment, we choose to use Mahony filter, which is a popular sensor fusion algorithm.
-	Mahony filter combines the data of accelerometer, gyroscope and magnetometer to realize real-time estimation of the attitude and direction of objects in three-dimensional space.
-	Its advantage lies in its higher computational efficiency. There is one big advantage.
+	\item   Firstly, connect the IIC multiplexer's VCC, GND, SDA, and SCL pins to the respective pins on the Arduino.
+	All the cables used were initially of the GROVE type, which was later replaced by screened cables.
+	\item   Then, each IMU was connected to one of the I2C multiplexer channels.
+	The port setting was saved into the code as portrayed in List~\ref{lst:port-saving}.
+
+	\lstset{language=C++}
+	\begin{lstlisting}[caption=Saving the port setting of four IMUs.,    numbers=left,
+		firstnumber=22, label={lst:port-saving}]
+//port number
+enum portConfiguration {
+    IMU_LEFT_FEMUR = 2,
+    IMU_RIGHT_FEMUR = 6,
+    IMU_LEFT_TIBIA = 5,
+    IMU_RIGHT_TIBIA = 7
+};
+	\end{lstlisting}
+
+	\item   After that, install the relevant libraries to drive the hardware components, such as the ``IMU-ICM20600.h'' and ``DFRobot\_I2C\_Multiplexer.h''.
+	Due to some reading issues encountered while using the magnetic sensor, the current project only utilized a 6DOF transformation.
+	The initialization logic of four IMUs is shown below, where the default data rate for IMU was set to be 100 Hz.
+
+	\lstset{language=C++}
+	\begin{lstlisting}[    numbers=left,
+		firstnumber=30, caption=Inilizing the multiplexer as well as four IMUs,label={lst:hardware-init}]
+I2CMulti.begin();   //init the multiplexer
+for (int i = 0; i < 8; i++) {
+    if (i == IMU_LEFT_FEMUR
+        || i == IMU_RIGHT_FEMUR
+        || i == IMU_LEFT_TIBIA
+        || i == IMU_RIGHT_TIBIA) {
+        I2CMulti.selectPort(i);
+        IMU_external.initialize();  //init the IMU
+        IMU_external_data[i].filter.begin(100);
+        delay(100);
+    }
+}
+	\end{lstlisting}
+
+	\item   After initialization, a calibration process was followed to improve the accuracy and reliability of the IMU's measurements.
+	It was achieved by averaging the whole data in the first three freezing seconds.
+	Then, future output would be reduced by this average to reduce factors of potential manufacturing variations or sensor drift.
+	Relevant code is included in List~\ref{lst:init-arduino} in Appendix.
+
+	\item   To obtain the motion data, the Attitude and Heading Reference System (AHRS) library named Mahony was utilized to generate Euler angles from raw data.
+	It is a set of algorithms designed to estimate the attitude and orientation of objects in three-dimensional space using fusion algorithms such as Kalman filter, Madgwick filter, and Mahony filter.
+	These tools enable fusing the raw data of IMUs to obtain more accurate, stable, and reliable attitude information.
+	The Mahony library, which is a popular sensor fusion algorithm, was selected for the experiment due to its higher computational efficiency.
+	Additionally, it contains a 6DOF transformation without using magnetic sensors.
+
 \end{enumerate}
 
 
@@ -69,6 +109,7 @@
 	\item   To enhance the transmission of motion data to front-end users, a custom JSON encoder was developed to package the raw motion data into a compact and efficient JSON format as List~\ref{lst:json} shows.
 	To increase communication rate, the content in such format has been extremely reduced by using abbreviations, where ``L\_F'' represents the motion data of left femur.
 	The Euler angles were also abbreviated to ``y'', ``r'', and ``p''.
+	Relevant code of the JSON formatter is in List~\ref{lst:json-formatter} in Appendix.
 \end{enumerate}
 
 \lstset{
@@ -88,10 +129,10 @@
 \end{lstlisting}
 
 
-\subsection{Displaying engine}
+\subsection{Displaying engine}\label{subsec:engine}
 
-With the tutorial given by official three.js website, a simple static 3D model generator was implemented.
-However, such generator was not flexible enough to rapidly create a specific model, such as humans or birds.
+With the tutorial given by official three.js website~\cite{threejs}, a simple static 3D model generator was thus implemented.
+However, such basic generator was not flexible enough to rapidly create a specific model, such as humans or birds.
 Hence, a function that can generate models according to user customization was developed.
 It works like a text operator and user could change his text to modify a corresponding model subsequently.
 Relevant results are presented in the next chapter.
@@ -109,19 +150,19 @@ In the meantime, the following are the main features of this displaying engine:
 
 
 \subsubsection{Reduce latency: multi-thread}
-To fully achieve the goal of real time rendering, as Figure~\ref{fig:browser_sequence} may illustrate, a multi-thread method was also developed.
+To fully achieve the goal of real time rendering, as depicted by the sequence diagram of Figure~\ref{fig:browser_sequence}, a multi-thread method was also developed.
 Particularly, one thread is designed to render the animation, inputting motion data to the model.
 Simultaneously, another thread is responsible for managing motion data, requesting them from server and applying interpolation.
 
 By achieving these, the latency raised by data fetching would be reduced to some extent.
 Relevant results are shown in the next chapter and core code is shown in
-Appendix~\ref{lst:flexible-input}.
+List~\ref{lst:flexible-input} in Appendix.
 
 
 \subsubsection{Reduce latency: frame interpolation}
 To smooth the animation and increase frame rate, a frame interpolation function was also integrated in the thread of data managing.
 For example, it would linearly insert five frames into the original single frame.
-Relevant core code is shown in Appendix~\ref{lst:intorpolation-with-data-matching}.
+Relevant core code is shown in List~\ref{lst:intorpolation-with-data-matching} in Appendix.
 
 
 \subsubsection{Data mapping}
@@ -134,15 +175,16 @@ During testing, it was observed that the roll output for the femur IMU is usuall
 Given that the yaw data was unstable and useless, the current engine could only achieve the motion follow in vertical plane.
 Therefore, a conditional statement using only roll data was added to the program to simply determine whether the leg is being lifted forward or backward.
 
-Relevant core code is shown in Appendix~\ref{lst:intorpolation-with-data-matching}, including the data matching for tibia IMU\@.
+Relevant core code is shown in List~\ref{lst:intorpolation-with-data-matching} in Appendix, including the data matching for tibia IMU\@.
 The logic for tibia IMU is similar but only added its corresponding femur IMU data.
 This is because the tibia part in the engine was built from its femur.
+
 
 \subsubsection{Avoid jittering}
 During actual testing, it was found that the model would exhibit some jittering even when the human object was freezing.
 Therefore, a threshold limitation feature was added.
 Only when the original data's variation exceeds a certain value, the new motion data will be regarded as valid and later input into the model.
-Relevant code is shown in Appendix~\ref{lst:intorpolation-with-data-matching}.
+Relevant code is shown in List~\ref{lst:intorpolation-with-data-matching} in Appendix.
 
 
 

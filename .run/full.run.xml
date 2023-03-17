@@ -11,7 +11,7 @@
       <main-file>$PROJECT_DIR$/src/main.tex</main-file>
       <output-path>{projectDir}/out</output-path>
       <auxil-path>{projectDir}/auxil</auxil-path>
-      <compile-twice>false</compile-twice>
+      <compile-twice>true</compile-twice>
       <output-format>PDF</output-format>
       <latex-distribution>TEXLIVE</latex-distribution>
       <has-been-run>false</has-been-run>
@@ -19,8 +19,9 @@
       <makeindex-run-config>[]</makeindex-run-config>
     </texify>
     <method v="2">
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="pre" run_configuration_type="LATEX_RUN_CONFIGURATION" />
+      <option name="RunConfigurationTask" enabled="false" run_configuration_name="pre" run_configuration_type="LATEX_RUN_CONFIGURATION" />
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="main bibliography" run_configuration_type="BIBTEX_RUN_CONFIGURATION" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="pre" run_configuration_type="LATEX_RUN_CONFIGURATION" />
     </method>
   </configuration>
 </component>

@@ -1,0 +1,48 @@
+\chapter{Discussion}
+
+
+\section{Arduino:  Euler angle output}
+\subsection{Data rate}
+The data collection frequency for a single round is only 20 Hz, which seems significantly different from the 100 Hz data rate set for the sensors.
+However, it should be noted that we have four sensors, and each sensor works at 100Hz to output data.
+In a single round, it would take the MCU longer to collect data from these four sensors, and there is also additional time required for the multiplexer to switch between the circuits.
+Therefore, the overall output data frequency for the entire pose, which includes data from all four IMUs, should be normal around 20 FPS\@.
+
+In order to increase the sampling frequency, a simple approach is to attempt upgrading the default data rate of the sensors to 1 kHz. However, this places higher demands on the quality of external IIC communication.
+Although shielded wires have been employed to transmit data, the length of the wires has exceeded 50cm, which may already be at the limit for IIC communication.
+As the IMU sampling frequency increases, the IIC communication lines may become busier and more susceptible to minor external interference.
+
+\subsection{Loss of yaw axis data}
+
+Although there was some instability in the yaw data for some unknown reasons, we were still able to create a digital twin that is capable of replicating the motion of kicking forward and backward using the roll axis data to judge.
+
+If feasible, the IMU type should be upgraded to a more powerful sensor, which also includes a temperature compensation circuit to avoid the effect from changing temperature.
+
+\section{Displaying engine: flexible configuration}
+
+The result in section~\ref{sec:flexible} indicates that the current displaying engine is sufficient to meet various requirements of modelling, merely generating corresponding skeletons composed of various joints.
+
+However, it is now still difficult to handle an incorrect input.
+Once the setting is wrong, the program will fail immediately, without giving any guidelines for the user to diagnose their wrong inputs.
+Hence, this could also be a future improvement.
+
+
+\section{Displaying  engine:  asynchronously  fetching data}
+With the results in section~\ref{sec:async}, the operation of multi-thread should be particularly useful while sending a large message, at least containing 10,000 poses in single message.
+However, in current project, given that the pose data rate was only 20Hz, the quantity in a one message would not exceed 20 poses, or the latency will be at least 1 second.
+As a result, the current design of multi-thread has not fully realized its intended function as the size of message is small.
+
+\section{Final Performance}
+
+\subsection{Latency}
+Despite efforts to reduce latency in the current real-time rendering process, such as using message abbreviations and implementing multi-threading for data sending and receiving, further improvements can be made.
+One potential solution for the future is to conduct a thorough analysis of the latency from the Arduino to the display engine.
+This analysis can help identify the primary sources of delay, allowing for targeted improvements.
+
+\subsection{Accuracy}
+Although accuracy was not listed as one of the main objectives for current project, it may be a key focus for future work, especially when it comes to precisely mirroring complex motions.
+This could become particularly important when the device is applied to study the flight dynamics of birds, where accurate data is essential.
+
+For instance, in the case of studying bird flight, the device will need to capture and analyze a vast amount of data with high accuracy in order to gain insights into the complex mechanics of avian flight.
+By achieving a higher level of accuracy in motion tracking, researchers can better understand the nuances of bird flight, including the subtle changes in wing angle, speed, and other factors that can affect flight performance.
+This can ultimately lead to a better understanding of the bio-mechanics of avian flight and help researchers design better drones and other aircraft.

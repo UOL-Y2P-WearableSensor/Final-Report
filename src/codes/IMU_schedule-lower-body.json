@@ -1,0 +1,19 @@
+{
+  "IMU_schedule": [
+    {"name": "body",
+        "parent_terminal": "0", "child_terminal": "1",
+        "Length":  "6", "Width":  "1", "Height": "1"},
+    {"name": "right_femur",
+        "parent_terminal": "0", "child_terminal": "2",
+        "Length":  "5", "Width":  "1", "Height": "1"},
+    {"name": "left_femur",
+        "parent_terminal": "0", "child_terminal": "4",
+        "Length":  "5", "Width":  "1", "Height": "1"},
+    {"name": "right_tibia",
+        "parent_terminal": "2", "child_terminal": "3",
+        "Length":  "4", "Width":  "1", "Height": "1"},
+    {"name": "left_tibia",
+        "parent_terminal": "4", "child_terminal": "5",
+        "Length":  "4", "Width":  "1", "Height": "1"}
+  ]
+}
