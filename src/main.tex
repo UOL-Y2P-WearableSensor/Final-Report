@@ -12,34 +12,41 @@
 \definecolor{MyLightYellow}{cmyk}{0,0.,0.2,0} % Used for program listings
 \definecolor{shadecolor}{cmyk}{0,0.2,0,0} % Used for snugshade listings
 \usepackage[top=3cm, bottom=3cm]{geometry}
-\usepackage{color}
-\usepackage{hyperref}
-\usepackage{listings}% page margins
+\usepackage{listings}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
 \setlength{\parskip}{10pt}                % sets spacing between paragraphs
 \interfootnotelinepenalty=500             % this prevents footnotes breaking across pages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Commands
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand\bibname{References}         % to change Bibliography to References
-\renewcommand\lstlistlistingname{List of Code Listings}
+\renewcommand\lstlistlistingname{List of Codes}
 \newcommand{\HRule}{\rule{\linewidth}{0.75mm}} % needed on title page
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
+
 \include{front_stuff}   %containging titlepage & abstract & declaration & table of contents...
 \include{introduction}  %containging backgrounds...
-\include{materials-and-methods} %list of all materials, methods?
 \include{design-and-implementation} %architecture design
-\include{results-and-analysis}  %latency & problems occured
-\include{discussion-and-conclusions}
+\include{materials-and-methods} %list of all materials, methods?
+\include{problem-identification-and-resolution} %list of all materials, methods?
+\include{results}  %latency & problems occured
+\include{discussion}
+\include{conclusions}
 
-%references
+
+
 \singlespace
-\bibliographystyle{IEEEtran}               % References section created automatically
-\bibliography{MyRefs}                      % The file MyRefs.bib contains the actual bibliography material
+\bibliographystyle{IEEEtran}
+\bibliography{/Users/shenyixiao/Repo/Final-Report/src/MyRefs}
 \addcontentsline{toc}{chapter}{References} % to add it to the table of contents
 
 %appendix
@@ -47,5 +54,159 @@
 \appendix
 \appendixpage
 \addappheadtotoc
+
+\chapter{Project Management Forms}
+%Appendix A: Attach the project management forms (Role allocation/responsibility matrix, Contribution to project deliverables, Attendance record, Supervisor weekly meeting log) to your project report as an appendix. Other supporting documents you may have used such as personal notes/notebooks/logbooks should not be included in the report.
+
+
+%-----------This is a FIGURE-----------------------
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{
+		appendix/attendence-record}
+	\caption{Attendence record.}
+	\label{fig:attendence-record}
+\end{figure}
+%--------End of this FIGURE -----------
+%-----------This is a FIGURE-----------------------
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{
+		appendix/project-contribution}
+	\caption{Contribution to project deliverables.}
+	\label{fig:project-contribution}
+\end{figure}
+%--------End of this FIGURE -----------
+%-----------This is a FIGURE-----------------------
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{
+		appendix/role-allocation}
+	\caption{Role allocation (responsibility matrix).}
+	\label{fig:role-allocation}
+\end{figure}
+%--------End of this FIGURE -----------
+
+%-----------This is a FIGURE-----------------------
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{
+		appendix/meeting-log-1}
+	\caption{Supervisor weekly meeting log 1.}
+	\label{fig:meeting-log-1}
+\end{figure}
+%--------End of this FIGURE -----------
+%-----------This is a FIGURE-----------------------
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{
+		appendix/meeting-log-2}
+	\caption{Supervisor weekly meeting log 2.}
+	\label{fig:meeting-log-2}
+\end{figure}
+%--------End of this FIGURE -----------
+%-----------This is a FIGURE-----------------------
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{
+		appendix/meeting-log-3}
+	\caption{Supervisor weekly meeting log 3.}
+	\label{fig:meeting-log-3}
+\end{figure}
+%--------End of this FIGURE -----------
+%-----------This is a FIGURE-----------------------
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{
+		appendix/meeting-log-4}
+	\caption{Supervisor weekly meeting log 4.}
+	\label{fig:meeting-log-4}
+\end{figure}
+%--------End of this FIGURE -----------
+
+
+
+\chapter{A Breakdown of Individual Contributions}
+
+%-----------This is a FIGURE-----------------------
+\begin{figure}[htbp]
+	\centering              %=left botm right top
+	\includegraphics[clip, trim=1.5cm 8cm 1.5cm 1.5cm, width=\textwidth]{
+		appendix/breakdown}
+	\caption[Breakdown of individual contributions]{Breakdown of individual contributions.}
+	\label{fig:breakdown}
+\end{figure}
+%--------End of this FIGURE -----------
+
+
+
+
+\chapter{Datasheets}
+
+%-----------This is a FIGURE-----------------------
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.1\textwidth]{
+		fileForWriting/data rate seeting}
+	\caption[Datasheet of the ICM20600 sensor component.]{Example output data rateconfigurations for accelerometer in low power mode, from datasheet~\cite{invensense-icm20600-datasheet}.}
+	\label{fig:data-rate-config}
+\end{figure}
+%--------End of this FIGURE -----------
+
+%-----------This is a FIGURE-----------------------
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.1\textwidth]{
+		fileForWriting/only two modifiable IIC address}
+	\caption[Datasheet of the ICM20600 sensor component.]{Partial datasheet of tthe ICM20600 sensor component~\cite{invensense-icm20600-datasheet}. The No.117 register indicates that for one specific compnent, there are at most two selectable IIC addresses to use.}
+	\label{fig:limited-IIC-address}
+\end{figure}
+%--------End of this FIGURE -----------
+
+\chapter{Codes}
+
+\lstset{language=JavaScript,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	commentstyle=\color{gray}\ttfamily,
+	morecomment=[l][\color{magenta}]{\#},
+	breaklines=true,
+	showstringspaces=false}
+
+\lstset{language=C++}
+\lstinputlisting[caption={C\texttt{++} code to init the IIC multiplexer and four sensors.}, label={lst:init-arduino}]{codes/init.cpp}
+
+\lstset{language=C++}
+\lstinputlisting[caption={C\texttt{++} code to package the motion data from Arduino into a JSON format.}, label={lst:json-formatter}]{codes/IMU_json.cpp}
+
+\lstset{language=JavaScript,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	commentstyle=\color{gray}\ttfamily,
+	morecomment=[l][\color{magenta}]{\#},
+	breaklines=true,
+	showstringspaces=false}
+
+
+\lstinputlisting[caption=JavaScript code for flexible-inputting function,label=lst:flexible-input]{codes/flexible-input.js}
+
+\lstinputlisting[caption=JavaScript code for matching and intorpolating data.,label=lst:intorpolation-with-data-matching]{codes/intorpolation-with-data-matching.js}
+
+\lstinputlisting[basicstyle=\footnotesize\ttfamily, breaklines=true, language={}, caption={Log for the Euler angle output in Arduino.},label={lst:time-consuming}]{codes/time-consuming.log}
+
+\lstset{
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{black}\ttfamily,
+	commentstyle=\color{gray}\ttfamily,
+	morecomment=[l][\color{magenta}]{\#},
+	breaklines=true,
+	showstringspaces=false}
+
+\lstinputlisting[language=JSON, caption=A text config to generate a model of human lower body.,label={lst:lower-body-config}]{codes/IMU_schedule-lower-body.json}
+
+\lstinputlisting[language=JSON, caption=Another text config to generate a model of full body,label={lst:full-body-config}]{codes/IMU_schedule-full.json}
 
 \end{document}

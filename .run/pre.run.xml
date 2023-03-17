@@ -11,7 +11,7 @@
       <main-file>$PROJECT_DIR$/src/main.tex</main-file>
       <output-path>$PROJECT_DIR$/out</output-path>
       <auxil-path>{projectDir}/auxil</auxil-path>
-      <compile-twice>false</compile-twice>
+      <compile-twice>true</compile-twice>
       <output-format>PDF</output-format>
       <latex-distribution>TEXLIVE</latex-distribution>
       <has-been-run>true</has-been-run>
