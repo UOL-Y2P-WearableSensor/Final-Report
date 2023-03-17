@@ -12,8 +12,6 @@
 \definecolor{MyLightYellow}{cmyk}{0,0.,0.2,0} % Used for program listings
 \definecolor{shadecolor}{cmyk}{0,0.2,0,0} % Used for snugshade listings
 \usepackage[top=3cm, bottom=3cm]{geometry}
-\usepackage{color}
-\usepackage{hyperref}
 \usepackage{listings}
 \usepackage{subcaption}
 \usepackage{xcolor}
@@ -30,6 +28,7 @@
 %document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+
 
 
 \include{front_stuff}   %containging titlepage & abstract & declaration & table of contents...
@@ -65,10 +64,28 @@ d
 	\centering
 	\includegraphics[width=1.1\textwidth]{
 		fileForWriting/only two modifiable IIC address}
-	\caption[Data sheet of the IMU component]{Partial data sheet of the IMU component. The No.117 register indicates that for one specific compnent, there are at most two selectable IIC addresses to use.}
+	\caption[Datasheet of the IMU component]{Partial datasheet of the IMU component. The No.117 register indicates that for one specific compnent, there are at most two selectable IIC addresses to use.}
 	\label{fig:limited-IIC-address}
 \end{figure}
 %--------End of this FIGURE -----------  
+\chapter{Codes}
+
+
+
+\lstset{language=JavaScript,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	commentstyle=\color{green}\ttfamily,
+	morecomment=[l][\color{magenta}]{\#},
+	breaklines=true,
+	showstringspaces=false}
+
+\lstinputlisting[caption=JavaScript code for flexible-inputting function,label=lst:flexible-input]{codes/flexible-input.js}
+
+\lstinputlisting[caption=JavaScript code for matching and intorpolating data.,label=lst:intorpolation-with-data-matching]{codes/intorpolation-with-data-matching.js}
+
+
 
 
 

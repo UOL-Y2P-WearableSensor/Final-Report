@@ -20,13 +20,15 @@
 	\item   18650 2,600mAh Lithium Rechargeable Batteries.
 \end{enumerate}
 
+
 \subsection{Software}
 \begin{enumerate}
-    \item JetBrains CLion: for socket server programming;
-    \item Arduino IDE \& PlatformIO: for Arduino programming;
-    \item Autodesk Fusion 360 \& SolidWorks \& SketchUp: for creating 3D models;
-    \item Three.js: for front-end programming;
+	\item JetBrains CLion: for socket server programming;
+	\item Arduino IDE \& PlatformIO: for Arduino programming;
+	\item Autodesk Fusion 360 \& SolidWorks \& SketchUp: for creating 3D models;
+	\item Three.js: for front-end programming;
 \end{enumerate}
+
 
 \section{Methods}
 
@@ -47,7 +49,7 @@
 
 \subsection{Arduino: wireless communication} \label{subsec:5g-network}
 \begin{enumerate}
-	\item   To enable the built-in Wi-Fi module on the Arduino-UNO-Wifi-Rev2, an external library called WiFiNINA was chosen and implemented.
+	\item   To enable the built-in Wi-Fi module on Arduino-UNO-Wifi-Rev2, an external library called WiFiNINA was chosen and implemented.
 	This library, provided by the official Arduino website, facilitates communication between the microcontroller and the onboard Wi-Fi module through a Serial Peripheral Interface (SPI).
 	It also provides some simple examples for studying.
 	\item   Initially, the Arduino was connected to a 2.4G network and attempted to establish a connection with a remote server through a handshake process.
@@ -58,6 +60,7 @@
 	This was accomplished by continuously sending an increasing number to the server, which was then printed by the server.
 	Meanwhile, the Arduino would also print out the message sent through a serial communication to the computer.
 \end{enumerate}
+
 
 \subsection{Socket server}
 \begin{enumerate}
@@ -73,7 +76,7 @@
 	numbers=left,
 	firstnumber=1
 }
-\begin{lstlisting}[caption={Example JSON code sent to front-end client.},label={lst:json}]
+\begin{lstlisting}[caption={JSON code sent to front-end client.},label={lst:json}]
 {
 	"L_F": [{
 		"y": -0.01,
@@ -85,13 +88,61 @@
 \end{lstlisting}
 
 
-\subsection{Displaying engineer}
-\begin{enumerate}
-	\item   %todo: procedue
-	\item   %todo: data-matching
-	\item   %todo: interpolation
-	\item   %todo: flexible to input
-\end{enumerate}
+\subsection{Displaying engine}
+
+With the tutorial given by official three.js website, a simple static 3D model generator was implemented.
+However, such generator was not flexible enough to rapidly create a specific model, such as humans or birds.
+Hence, a function that can generate models according to user customization was developed.
+It works like a text operator and user could change his text to modify a corresponding model subsequently.
+Relevant results are presented in the next chapter.
+In the meantime, the following are the main features of this displaying engine:
+
+%-----------This is a FIGURE-----------------------
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{
+		fileForWriting/browser_sequence}
+	\caption[Sequence diagram of the displaying engine]{Sequence diagram of the displaying engine.}
+	\label{fig:browser_sequence}
+\end{figure}
+%--------End of this FIGURE -----------
+
+
+\subsubsection{Reduce latency: multi-thread}
+To fully achieve the goal of real time rendering, as Figure~\ref{fig:browser_sequence} may illustrate, a multi-thread method was also developed.
+Particularly, one thread is designed to render the animation, inputting motion data to the model.
+Simultaneously, another thread is responsible for managing motion data, requesting them from server and applying interpolation.
+
+By achieving these, the latency raised by data fetching would be reduced to some extent.
+Relevant results are shown in the next chapter and core code is shown in
+Appendix~\ref{lst:flexible-input}.
+
+
+\subsubsection{Reduce latency: frame interpolation}
+To smooth the animation and increase frame rate, a frame interpolation function was also integrated in the thread of data managing.
+For example, it would linearly insert five frames into the original single frame.
+Relevant core code is shown in Appendix~\ref{lst:intorpolation-with-data-matching}.
+
+
+\subsubsection{Data mapping}
+To account for the mismatch between the coordinate system used in the engine and the IMU coordinate system in the real world, a mathematical mapping was also implemented to convert IMU data into angle change values for the animation.
+
+Specifically, for the femur's up and down movements in the engine, the corresponding pitch angle is given by ±(90° + IMU pitch angle), where the positive or negative sign depends on whether the current angle is lifting the leg forward or backward.
+
+During testing, it was observed that the roll output for the femur IMU is usually around 0° when lifting the leg forward, and around 180° when lifting the leg backward.
+
+Given that the yaw data was unstable and useless, the current engine could only achieve the motion follow in vertical plane.
+Therefore, a conditional statement using only roll data was added to the program to simply determine whether the leg is being lifted forward or backward.
+
+Relevant core code is shown in Appendix~\ref{lst:intorpolation-with-data-matching}, including the data matching for tibia IMU\@.
+The logic for tibia IMU is similar but only added its corresponding femur IMU data.
+This is because the tibia part in the engine was built from its femur.
+
+\subsubsection{Avoid jittering}
+During actual testing, it was found that the model would exhibit some jittering even when the human object was freezing.
+Therefore, a threshold limitation feature was added.
+Only when the original data's variation exceeds a certain value, the new motion data will be regarded as valid and later input into the model.
+Relevant code is shown in Appendix~\ref{lst:intorpolation-with-data-matching}.
 
 
 
